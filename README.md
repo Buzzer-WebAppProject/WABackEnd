@@ -3,7 +3,7 @@
 
 
 <p><strong>Fakultet:</strong> Fakulet Informatike u Puli (<strong>https://fipu.unipu.hr/</strong>)</p>
-<p><strong>Kolegij:</strong> Programsko Inženjerstvo (<strong>https://ntankovic.unipu.hr/pi</strong>)</p>
+<p><strong>Kolegij:</strong> Web aplikacije (<strong>https://ntankovic.unipu.hr/pi</strong>)</p>
 <p><strong>Mentori:</strong> doc. dr. sc. Nikola Tanković (<strong>https://ntankovic.unipu.hr</strong>) i Nikki Bernobić, univ. bacc. inf.</p>
 
 <h2>What is Buzzer?</h2>
