@@ -1,28 +1,77 @@
-// Datoteka: src/memory_storage.js
-
 let storage = {
-    posts: [
-        {
-            id: 10001,
-            createdBy: "nikola@tankovic.me",
-            postedAt: "1576599080230",
-            source: "https://picsum.photos/id/669/500/500",
-            title: "pula more",
+    users: [
+        {   fullname: "David Kostic",
+            id: 1,
+            mail: "dkostic@mail.com",
+            beehiveCount: 3,
+            beehives: [{
+                id: 1,
+                lastFeedingDate: "12.3.2021.",
+                InsideTemperature: "35 C",
+                OutsideTemperature: "22 C"
+            },
+            {
+                id: 2,
+                lastFeedingDate: "12.3.2021.",
+                InsideTemperature: "35 C",
+                OutsideTemperature: "22 C"
+            },
+            {
+                id: 3,
+                lastFeedingDate: "12.3.2021.",
+                InsideTemperature: "35 C",
+                OutsideTemperature: "22 C"
+            }]
         },
-        {
-            id: 10002,
-            createdBy: "marko@markovic.me",
-            postedAt: "1577349684270",
-            source: "https://picsum.photos/id/234/500/500",
-            title: "zagreb kopno",
+        {   fullname: "David Maglica",
+            id: 2,
+            mail: "dmaglica@mail.com",
+            beehiveCount: 1,
+            beehives: [{
+                id: 1,
+                lastFeedingDate: "12.3.2021.",
+                InsideTemperature: "35 C",
+                OutsideTemperature: "22 C"
+            }]
         },
-        {
-            id: 10003,
-            createdBy: "iva@ivkovic.me",
-            postedAt: "1577349684270",
-            source: "https://picsum.photos/id/12/500/500",
-            title: "rijeka luka",
+        {   fullname: "Pčelko Pčelar",
+            id: 3,
+            mail: "ppcelar@mail.com",
+            beehiveCount: 5,
+            beehives: [{
+                id: 1,
+                lastFeedingDate: "12.3.2021.",
+                InsideTemperature: "35 C",
+                OutsideTemperature: "22 C"
+            },
+            {
+                id: 2,
+                lastFeedingDate: "12.3.2021.",
+                InsideTemperature: "35 C",
+                OutsideTemperature: "22 C"
+            },
+            {
+                id: 3,
+                lastFeedingDate: "12.3.2021.",
+                InsideTemperature: "35 C",
+                OutsideTemperature: "22 C"
+            },
+            {
+                id: 4,
+                lastFeedingDate: "12.3.2021.",
+                InsideTemperature: "35 C",
+                OutsideTemperature: "22 C"
+            },
+            {
+                id: 5,
+                lastFeedingDate: "12.3.2021.",
+                InsideTemperature: "35 C",
+                OutsideTemperature: "22 C"
+            }]
+            
         }
-    ]
+    ],
+
 }
+
 export default storage;

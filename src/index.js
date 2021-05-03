@@ -5,29 +5,48 @@ import cors from 'cors'
 const app = express()  // instanciranje aplikacije
 const port = 3000  // port na kojem će web server slušati
 
-app.use(cors())
+app.use(cors());
+app.use(express.json());
 
-app.get('/posts', (req, res) => {
-    let posts = storage.posts
-    let query = req.query
-    
-    if (query.title) {
-        posts = posts.filter(e => e.title.indexOf(query.title) >= 0)
-    }
-    
-    if (query.createdBy) {
-        posts = posts.filter(e => e.createdBy.indexOf(query.createdBy) >= 0)
-    }
-    
-    if (query._any) {
-        let terms = query._any.split(" ")
-        posts = posts.filter(doc => {
-            let info = doc.title + " " + doc.createdBy
-            return terms.every(term => info.indexOf(term) >= 0)
-        })
-    }
-
-    res.json(posts)
+app.get('/', (req, res) => {
+    res.json({})
 })
 
-app.listen(port, () => console.log(`Slušam na portu ${port}!`))
+app.get('/beehives', (req, res) => {
+    // used to get beehive data
+
+
+    res.send({})
+})
+
+app.get('/users', (req, res) => {
+    // used to get user details
+    let userlist = storage.users;
+
+    // console.log("Ok!");
+    let doc = req.body;
+
+    res.json(userlist);
+})
+
+app.post('/users', (req, res) => {
+    // used to set user details
+    let userlist = storage.users;
+    let query = req.query;
+
+    // console.log("Ok!");
+    let doc = req.body;
+
+    res.json(doc);
+})
+
+app.post('/beehives', (req, res) => {
+    // used to set beehive details
+
+    console.log("Ok!");
+    let doc = req.body;
+
+    res.json(doc);
+})
+
+app.listen(port, () => console.log(`Backend port -> ${port}!`))
