@@ -40,44 +40,6 @@ let storage = {
         },
       ],
     },
-    {
-      fullname: "Pčelko Pčelar",
-      UID: 3,
-      mail: "ppcelar@mail.com",
-      beehiveCount: 5,
-      beehives: [
-        {
-          bId: 1,
-          lastFeedingDate: "12.3.2021.",
-          InsideTemperature: "35 C",
-          OutsideTemperature: "22 C",
-        },
-        {
-          bId: 2,
-          lastFeedingDate: "12.3.2021.",
-          InsideTemperature: "35 C",
-          OutsideTemperature: "22 C",
-        },
-        {
-          bId: 3,
-          lastFeedingDate: "12.3.2021.",
-          InsideTemperature: "35 C",
-          OutsideTemperature: "22 C",
-        },
-        {
-          bId: 4,
-          lastFeedingDate: "12.3.2021.",
-          InsideTemperature: "35 C",
-          OutsideTemperature: "22 C",
-        },
-        {
-          bId: 5,
-          lastFeedingDate: "12.3.2021.",
-          InsideTemperature: "35 C",
-          OutsideTemperature: "22 C",
-        },
-      ],
-    },
   ],
 };
 
