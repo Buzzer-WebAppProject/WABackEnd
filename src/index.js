@@ -69,7 +69,6 @@ app.get("/tajna", (req, res) => {
 
 app.post("/users", async (req, res) => {
   // used to set user details
-
   // registracija
   let user = req.body;
 
