@@ -84,6 +84,8 @@ app.post("/users", async (req, res) => {
 app.post("/auth", async (req, res) => {
   let user = req.body;
 
+  // login
+
   try {
     let result = await auth.loginFn(user.mail, user.password);
     res.json(result);
