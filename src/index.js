@@ -131,15 +131,15 @@ app.put("/beehives/:id", async (req, res) => {
 
   console.log(data);
 
-  // let check = checkAttributes(data);
+  let check = checkAttributes(data);
 
-  // if (!check) {
-  //   res.json({
-  //     status: "fail",
-  //     reason: "incomplete",
-  //   });
-  //   return;
-  // }
+  if (!check) {
+    res.json({
+      status: "fail",
+      reason: "incomplete",
+    });
+    return;
+  }
 
   let db = await connect();
 
