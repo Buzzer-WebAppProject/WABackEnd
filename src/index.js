@@ -6,6 +6,8 @@ import storage from "./memory_storage.js";
 import cors from "cors";
 import connect from "./db.js";
 import auth from "./auth.js";
+import MongoClient from "mongodb/lib/mongo_client";
+import mongo from "mongodb";
 
 const app = express(); // instanciranje aplikacije
 const port = 3000; // port na kojem će web server slušati
@@ -13,54 +15,48 @@ const port = 3000; // port na kojem će web server slušati
 app.use(cors());
 app.use(express.json());
 
+let checkAttributes = (data) => {
+  if (
+    !data.nick ||
+    !data.mail ||
+    !data.lastFeedingDate ||
+    !data.InsideTemperature ||
+    !data.OutsideTemperature
+  ) {
+    return false;
+  }
+  return true;
+};
+
 app.get("/", (req, res) => {
   res.json({});
 });
 
 app.get("/beehives", async (req, res) => {
   let db = await connect();
-  let cursor = await db
+  let query = req.query;
+
+  let selekcija = {};
+  if (query.mail) {
+    selekcija.mail = query.mail;
+  }
+  console.log(selekcija);
+
+  let cursor = await db.collection("beehives").find(selekcija);
+
+  let results = await cursor.toArray();
+
+  res.json(results);
+});
+app.get("/beehives/:id", async (req, res) => {
+  let id = req.params.id;
+  let db = await connect();
+
+  let result = await db
     .collection("beehives")
-    .find({ fullname: "David Kostic" });
+    .findOne({ _id: mongo.ObjectId(id) });
 
-  let data = await cursor.toArray();
-
-  res.json(data);
-});
-
-app.get("/beehives_memory", (req, res) => {
-  // used to get beehive data
-  let bList = [];
-  let bDataList = [];
-  for (var i = 0; i < storage.users.length; i++) {
-    let bCount = storage.users[i].beehiveCount;
-    if (storage.users[i].fullname == "David Kostic") {
-      for (let x = 0; x < storage.users[i].beehives.length; x++) {
-        var bData = storage.users[i].beehives[x];
-        bDataList.push(bData);
-      }
-      bList.push(bCount);
-    }
-  }
-  let doc = req.body;
-
-  res.json(bDataList);
-});
-
-app.get("/users", (req, res) => {
-  // used to get user details
-  let userlist = storage.users;
-  console.log("length", storage.users.length);
-
-  for (let i = 0; i < storage.users.length; i++) {
-    let username = storage.users[i].fullname;
-    let beehiveCount = userlist[i].beehiveCount;
-    console.log(username, "has", beehiveCount, "beehives");
-  }
-  console.log("Ok!");
-  let doc = req.body;
-
-  res.json(userlist);
+  res.json(result);
 });
 
 app.get("/tajna", (req, res) => {
@@ -82,9 +78,8 @@ app.post("/users", async (req, res) => {
 });
 
 app.post("/auth", async (req, res) => {
-  let user = req.body;
-
   // login
+  let user = req.body;
 
   try {
     let result = await auth.loginFn(user.mail, user.password);
@@ -96,8 +91,69 @@ app.post("/auth", async (req, res) => {
   res.send(user);
 });
 
-app.post("/beehives", (req, res) => {
+app.post("/beehives", async (req, res) => {
   // used to set beehive details
+  let data = req.body;
+
+  delete data._id;
+
+  if (
+    !data.nick ||
+    !data.mail ||
+    !data.lastFeedingDate ||
+    !data.InsideTemperature ||
+    !data.OutsideTemperature
+  ) {
+    res.json({
+      status: "fail",
+      reason: "incomplete",
+    });
+    return;
+  }
+
+  let db = await connect();
+
+  let result = await db.collection("beehives").insertOne(data);
+
+  if (result && result.insertedCount == 1) {
+    res.json("all ok");
+  } else {
+    res.json({
+      status: "fail",
+    });
+  }
+});
+
+app.put("/beehives/:id", async (req, res) => {
+  // used to set beehive details
+  let id = req.params.id;
+  let data = req.body;
+
+  console.log(data);
+
+  let check = checkAttributes(data);
+
+  if (!check) {
+    res.json({
+      status: "fail",
+      reason: "incomplete",
+    });
+    return;
+  }
+
+  let db = await connect();
+
+  let result = await db
+    .collection("beehives")
+    .replaceOne({ _id: mongo.ObjectId(id) }, data);
+
+  if (result && result.modifiedCount == 1) {
+    res.json({ status: "success" });
+  } else {
+    res.json({
+      status: "fail",
+    });
+  }
 });
 
 app.listen(port, () => console.log(`Backend port -> ${port}!`));
