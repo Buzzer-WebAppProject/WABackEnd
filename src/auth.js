@@ -39,6 +39,7 @@ export default {
       (await bcrypt.compare(password, user.password))
     ) {
       delete user.password;
+
       // izdavanje tokena
       let token = jwt.sign(user, process.env.JWT_SECRET, {
         algorithm: "HS512",
