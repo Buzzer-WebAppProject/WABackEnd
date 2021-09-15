@@ -10,7 +10,7 @@ import MongoClient from "mongodb/lib/mongo_client";
 import mongo from "mongodb";
 
 const app = express(); // instanciranje aplikacije
-const port = 3000; // port na kojem će web server slušati
+const port = process.ev.port || 3000; // port na kojem će web server slušati
 
 app.use(cors());
 app.use(express.json());
