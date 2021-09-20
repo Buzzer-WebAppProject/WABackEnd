@@ -1,7 +1,7 @@
 {
   "name": "y",
   "version": "1.0.0",
-  "description": "",
+  "description": "<p>In this repository, You can find all the available documents that were needed to create Buzzer, a WebApp made by a team of two(2) students (David Kostić and David Maglica) as our project for our Web Applications class.</p>",
   "main": "index.js",
   "scripts": {
     "serve": "nodemon --exec babel-node src/index.js",
@@ -22,5 +22,14 @@
     "@babel/node": "^7.15.4",
     "@babel/preset-env": "^7.15.6",
     "nodemon": "^2.0.12"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Buzzer-WebAppProject/WABackEnd.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Buzzer-WebAppProject/WABackEnd/issues"
+  },
+  "homepage": "https://github.com/Buzzer-WebAppProject/WABackEnd#readme"
 }
